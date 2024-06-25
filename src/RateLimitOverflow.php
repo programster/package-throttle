@@ -18,7 +18,7 @@ class RateLimitOverflow
     public function __construct(public readonly RateLimit $rateLimit, public readonly int $numRequestsRecieved)
     {
         // Check to make sure that the number of requests does actually exceed the specified rate limit.
-        if ($numRequestsRecieved <= $rateLimit)
+        if ($numRequestsRecieved <= $rateLimit->numAllowedRequests)
         {
             throw new RateLimitOverflowException("Specified number of requests received does not exceed the provided rate limit.");
         }
