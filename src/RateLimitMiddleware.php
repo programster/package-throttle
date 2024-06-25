@@ -2,6 +2,7 @@
 
 namespace Programster\Throttle;
 
+use Programster\Throttle\Exceptions\RateLimitMissingException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -37,7 +38,7 @@ class RateLimitMiddleware implements MiddlewareInterface
     {
         if (count($rateLimits) < 1)
         {
-            throw new Exception("No rate limits were provided to the rate limiting middleware.");
+            throw new RateLimitMissingException("No rate limits were provided to the rate limiting middleware.");
         }
     }
 
