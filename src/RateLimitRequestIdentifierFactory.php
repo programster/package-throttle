@@ -1,7 +1,7 @@
 <?php
 
 /*
- * A factory for creating and returning whay are likely to be commonly used request identifiers. E.g. fetching
+ * A factory for creating and returning what are likely to be commonly used request identifiers. E.g. fetching
  * the user's IP address from a header.
  */
 
@@ -31,7 +31,7 @@ class RateLimitRequestIdentifierFactory
      */
     public static function createPhpServerAddr() : RateLimitRequestIdentifierInterface
     {
-        return new class implements InterfaceRequestorIdentifier {
+        return new class implements RateLimitRequestIdentifierInterface {
             public function getIdentifier(ServerRequestInterface $request): string
             {
                 return $_SERVER['REMOTE_ADDR'];
@@ -47,7 +47,7 @@ class RateLimitRequestIdentifierFactory
      */
     public static function createCloudflare() : RateLimitRequestIdentifierInterface
     {
-        return new class implements InterfaceRequestorIdentifier {
+        return new class implements RateLimitRequestIdentifierInterface {
             public function getIdentifier(ServerRequestInterface $request): string
             {
                 $headers = $request->getHeader('CF-Connecting-IP');
@@ -60,11 +60,11 @@ class RateLimitRequestIdentifierFactory
     /**
      * Create an identifier that will return the IP in the X-Forwarded-For header that is used
      * by most proxy software.
-     * @return InterfaceRequestorIdentifier
+     * @return RateLimitRequestIdentifierInterface
      */
-    public static function createForwardedForHeader() : InterfaceRequestorIdentifier
+    public static function createForwardedForHeader() : RateLimitRequestIdentifierInterface
     {
-        return new class implements InterfaceRequestorIdentifier {
+        return new class implements RateLimitRequestIdentifierInterface {
             public function getIdentifier(ServerRequestInterface $request): string
             {
                 $headers = $request->getHeader('X-Forwarded-For');
