@@ -2,7 +2,9 @@
 
 namespace Programster\Throttle;
 
-class RateLimitCollection extends Programster\Collections\AbstractCollection
+use Programster\Collections\AbstractCollection;
+
+class RateLimitCollection extends AbstractCollection
 {
     public function __construct(RateLimit ...$rateLimits)
     {
