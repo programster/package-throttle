@@ -15,7 +15,7 @@ class RateLimitOverflow
      * @param int $numAllowedRequests - the number of requests allowed
      * @param int $timePeriodInSeconds - the time period the number of requests are allowed within.
      */
-    public function __construct(public readonly RateLimit $rateLimit, int $numRequestsRecieved)
+    public function __construct(public readonly RateLimit $rateLimit, public readonly int $numRequestsRecieved)
     {
         // Check to make sure that the number of requests does actually exceed the specified rate limit.
         if ($numRequestsRecieved <= $rateLimit)
